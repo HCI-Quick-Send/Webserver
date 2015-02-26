@@ -35,7 +35,7 @@ app.use(allowCrossDomain);
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
-var port = 80;
+var port = 8080;
 
 //ROUTES FOR OUR API
 //==============================================
