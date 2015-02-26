@@ -9,6 +9,7 @@
 		"pg":"*",
 		"node-uuid":"*",
 		"node-gcm":"*",
-		"cors":"*"
+		"cors":"*",
+		"mysql":"*"
 	}
 }

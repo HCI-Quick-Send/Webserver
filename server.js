@@ -5,6 +5,7 @@
 var express	= require('express');
 var cors 	= require('cors');
 var app		= express();
+var http = require('http').Server(app);
 var bodyParser	= require('body-parser');
 
 var dbConfig = require('./app/config/db');
@@ -34,7 +35,7 @@ app.use(allowCrossDomain);
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
-var port = 8080;
+var port = 80;
 
 //ROUTES FOR OUR API
 //==============================================
@@ -44,7 +45,7 @@ var router = express.Router();
 
 router.use(function(req, res, next) {
 	//do logging
-	console.log('Something Happened!');
+	console.log('Something Happens!');
 	next();
 });
 
@@ -66,6 +67,10 @@ router.get('/', function(req,res){
 // all of our routes will be prefixed with /api
 
 app.use('/api', router);
+
+http.listen(port, function(){
+  console.log('listening on *:'+ port);
+});
 
 console.log('Magic happens on port ' + port);
 
