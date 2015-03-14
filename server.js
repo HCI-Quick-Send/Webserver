@@ -4,6 +4,7 @@
 
 var express	= require('express');
 var cors 	= require('cors');
+var mysql 	= require('mysql');
 var app		= express();
 var http = require('http').Server(app);
 var bodyParser	= require('body-parser');
@@ -21,7 +22,7 @@ app.set('bookshelf', bookshelf);
 
 
 //Creating a Model for the gcm table
-//var GCMDB = require('./app/models/gcm_model.js')(bookshelf,Users);
+var GCMDB = require('./app/models/gcm_model.js')(bookshelf);
 
 //configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -61,7 +62,7 @@ router.get('/', function(req,res){
 //require('./app/routes/gcm/gcm_route')(router, Session, GCMDB, error_json, success_json, check_session);
 
 //API Call for /api/gcm/send to test gcm
-//require('./app/routes/gcm/gcm_send_route')(router,GCMDB, knex, error_json, success_json, check_session);
+require('./app/routes/gcm/gcm_send_route')(router,GCMDB, knex);
 
 // REGISTER OUR ROUTES ----------
 // all of our routes will be prefixed with /api

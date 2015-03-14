@@ -1,11 +1,8 @@
 //Creating a Model for the gcm Table
-module.exports = function(bookshelf, Users)
+module.exports = function(bookshelf)
 {
 	return bookshelf.Model.extend({
-		tableName:'gcm',
-		idAttribute: 'User_id',
-		"User_id": function(){
-            return this.hasOne(Users,["User_id"])
-        }
+		tableName:'GCM',
+		idAttribute: 'gcm_id'
 	});
 };

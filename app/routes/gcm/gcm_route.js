@@ -1,5 +1,5 @@
 //API calls for /api/gcm to save registration ids
-module.exports = function(router, Session, GCMDB, error_json, success_json, check_session)
+module.exports = function(router, Session, GCMDB)
 {
 	router.route('/gcm')
 	.post(function(req,res) {

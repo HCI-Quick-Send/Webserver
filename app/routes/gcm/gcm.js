@@ -15,6 +15,28 @@ module.exports = function(data,u_ids, GCMDB, knex)
 	
 	console.log("Sending to Users: ");
 	console.log(u_ids);
+	
+	new GCMDB().fetchAll({
+	}).then(function(result){
+		dbinfo = result.toJSON();
+		sender.send(message, [dbinfo.gcm_id], 4, function (err, ret) {
+
+					if(err !== null) console.log('Error: ' + err);
+					else console.log(ret);
+
+				});
+	});
+	/*
+	knex('GCM')
+	.select('*')
+	.then(function(result) {
+		console.log(result);
+	})
+	.catch(function(error) {
+			console.log(error);
+			res.json(error_json("101"));
+	});
+	/*
 	knex('gcm')
 	.whereIn("User_id",u_ids)
 	.then(function(result) {
@@ -41,6 +63,7 @@ module.exports = function(data,u_ids, GCMDB, knex)
 			console.log(error);
 			res.json(error_json("101"));
 	});
+	*/
 	
 	
 
