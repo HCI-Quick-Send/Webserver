@@ -7,6 +7,7 @@ module.exports = function(data,u_ids, GCMDB, knex)
 	var message = new gcm.Message();
 	var apiKey = require('../../config/gcmconfig.js');
 	var sender = new gcm.Sender(apiKey);
+	console.log(data);
 	message.addDataWithObject(data);
 	
 	console.log("Came here!!");
@@ -19,7 +20,9 @@ module.exports = function(data,u_ids, GCMDB, knex)
 	new GCMDB().fetchAll({
 	}).then(function(result){
 		dbinfo = result.toJSON();
-		sender.send(message, [dbinfo.gcm_id], 4, function (err, ret) {
+		var id = dbinfo[0].gcm_id.trim();
+		console.log(id);
+		sender.send(message, [id], 4, function (err, ret) {
 
 					if(err !== null) console.log('Error: ' + err);
 					else console.log(ret);
