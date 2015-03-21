@@ -2,7 +2,7 @@
 module.exports = function(bookshelf)
 {
 	return bookshelf.Model.extend({
-		tableName:'users',
-		idAttribute: 'User_id'
+		tableName:'FB_GCM',
+		idAttribute: ['fb_id','gcm_id']
 	});
 };

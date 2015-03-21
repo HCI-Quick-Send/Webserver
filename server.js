@@ -18,8 +18,13 @@ app.use(cors());
 app.set('bookshelf', bookshelf);
 
 //Creating a Model for the User Table
-//var Users = require('./app/models/user_model.js')(bookshelf);
+var Users = require('./app/models/fb_gcm_model.js')(bookshelf);
 
+/* new Users().fetchAll({
+	}).then(function(result){
+		dbinfo = result.toJSON();
+		console.log(dbinfo);
+	}); */
 
 //Creating a Model for the gcm table
 var GCMDB = require('./app/models/gcm_model.js')(bookshelf);
@@ -58,8 +63,8 @@ router.get('/', function(req,res){
 // more routes for our API will happen here
 
 
-//API Call for /api/gcm to register gcm reg_ids with the backend
-//require('./app/routes/gcm/gcm_route')(router, Session, GCMDB, error_json, success_json, check_session);
+//API Call for /api/gcm to register gcm reg_ids and FB_ids with the backend
+require('./app/routes/user/user_route')(router, Users);
 
 //API Call for /api/gcm/send to test gcm
 require('./app/routes/gcm/gcm_send_route')(router,GCMDB, knex);
