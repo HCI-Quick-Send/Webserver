@@ -17,7 +17,8 @@ module.exports = function(data,u_ids, GCMDB, knex)
 	console.log("Sending to Users: ");
 	console.log(u_ids);
 	
-	var users = JSON.parse(data.users).split(',');
+	var users = data.users;
+	console.log(users);
 	knex('FB_GCM')
 	.whereIn("fb_id",users)
 	.then(function(result) {
