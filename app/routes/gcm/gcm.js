@@ -17,35 +17,14 @@ module.exports = function(data,u_ids, GCMDB, knex)
 	console.log("Sending to Users: ");
 	console.log(u_ids);
 	
-	new GCMDB().fetchAll({
-	}).then(function(result){
-		dbinfo = result.toJSON();
-		var id = dbinfo[0].gcm_id.trim();
-		console.log(id);
-		sender.send(message, [id], 4, function (err, ret) {
-
-					if(err !== null) console.log('Error: ' + err);
-					else console.log(ret);
-
-				});
-	});
-	/*
-	knex('GCM')
-	.select('*')
-	.then(function(result) {
-		console.log(result);
-	})
-	.catch(function(error) {
-			console.log(error);
-			res.json(error_json("101"));
-	});
-	/*
-	knex('gcm')
-	.whereIn("User_id",u_ids)
+	var users = JSON.parse(data.users).split(',');
+	knex('FB_GCM')
+	.whereIn("fb_id",users)
 	.then(function(result) {
 		for( u in result)
 		{
-			r_ids.push(result[u]["reg_id"]);
+			console.log(u);
+			r_ids.push(result[u]["gcm_id"]);
 			try
 			{
 				sender.send(message, r_ids, 4, function (err, ret) {
@@ -60,14 +39,12 @@ module.exports = function(data,u_ids, GCMDB, knex)
 				console.log(gcmerr);
 			}
 		}
-		return true;
 	})
 	.catch(function(error) {
 			console.log(error);
-			res.json(error_json("101"));
+			res.send({error:'GCM Error'});
 	});
-	*/
-	
+
 	
 
 }
